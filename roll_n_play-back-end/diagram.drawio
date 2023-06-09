@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-06-09T21:38:51.902Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 OPR/99.0.0.0" etag="ntdvr9w2NTMysvv8zyqX" version="21.3.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-09T21:43:32.528Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 OPR/99.0.0.0" etag="Yh4tigcWdNgJQotsNu50" version="21.3.8" type="github">
   <diagram name="Page-1" id="efa7a0a1-bf9b-a30e-e6df-94a7791c09e9">
-    <mxGraphModel dx="2255" dy="1251" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="826" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2577" dy="1430" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="826" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -295,6 +295,9 @@
         </mxCell>
         <mxCell id="wFQ1KbEsBTzY-ZEgkcZI-76" value="spells" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
           <mxGeometry x="1239.0034782608695" y="849.9965217391305" as="geometry" />
+        </mxCell>
+        <mxCell id="wFQ1KbEsBTzY-ZEgkcZI-77" value="&lt;p style=&quot;margin: 4px 0px 0px; text-align: center; text-decoration: underline; font-size: 14px;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;SUBTITLE&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;&lt;hr style=&quot;font-size: 14px;&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px; font-size: 14px;&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;blue = TEXT TYPE&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px; font-size: 14px;&quot;&gt;&lt;font color=&quot;#ff3333&quot;&gt;red = INTEGER TYPE&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 8px; font-size: 14px;&quot;&gt;&lt;font style=&quot;background-color: rgb(0, 0, 0);&quot; color=&quot;#33ff33&quot;&gt;green = BOOLEAN TYPE&lt;/font&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;strokeColor=#003366;shadow=1;fillColor=#D4E1F5;fontColor=#003366;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="140" width="200" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
