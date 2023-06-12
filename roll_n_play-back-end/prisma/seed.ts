@@ -164,6 +164,49 @@ async function main() {
       attribute_id: wisdom.id,
     },
   });
+
+  //create races (only Human for now)
+  const race = await prisma.dnd5eRace.findFirst();
+  if (race) {
+    await prisma.dnd5eRace.deleteMany();
+    await prisma.dnd5eRacialTrait.deleteMany();
+  }
+  const human = await prisma.dnd5eRace.create({
+    data: {
+      name: 'Human',
+      description:
+        'In the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene and short-lived in comparison to dwarves, elves, and dragons. Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that’s why they build their mighty empires on the foundation of conquest and trade. Whatever drives them, humans are the innovators, the achievers, and the pioneers of the worlds.',
+      system_id: system.id,
+    },
+  });
+  const racialTraits = await prisma.dnd5eRacialTrait.createMany({
+    data: [
+      { name: 'Ability Score Increase', description: 'Your ability scores each increase by 1.', race_id: human.id },
+      {
+        name: 'Age',
+        description: 'Humans reach adulthood in their late teens and live less than a century.',
+        race_id: human.id,
+      },
+      {
+        name: 'Alignment',
+        description: 'Humans tend toward no particular alignment. The best and the worst are found among them.',
+        race_id: human.id,
+      },
+      {
+        name: 'Size',
+        description:
+          'Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Regardless of your position in that range, your size is Medium.',
+        race_id: human.id,
+      },
+      { name: 'Speed', description: 'Your base walking speed is 30 feet.', race_id: human.id },
+      {
+        name: 'Languages',
+        description:
+          'You can speak, read, and write Common and one extra language of your choice. Humans typically learn the languages of other peoples they deal with, including obscure dialects. They are fond of sprinkling their speech with words borrowed from other tongues: Orc curses, Elvish musical expressions, Dwarvish military phrases, and so on.',
+        race_id: human.id,
+      },
+    ],
+  });
 }
 
 main()
