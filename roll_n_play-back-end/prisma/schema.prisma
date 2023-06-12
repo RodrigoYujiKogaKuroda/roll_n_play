@@ -29,6 +29,7 @@ model System {
   logo_url                  String?
   created_at                DateTime                  @default(now())
   updated_at                DateTime                  @updatedAt
+  dnd5e_attributes          Dnd5eAttribute[]
   dnd5e_races               Dnd5eRace[]
   dnd5e_classes             Dnd5eClass[]
   dnd5e_characters          Dnd5eCharacter[]
@@ -39,6 +40,8 @@ model System {
 model Dnd5eAttribute {
   id                        Int                       @id @default(autoincrement())
   name                      String                    @unique @db.VarChar(255)
+  system                    System                    @relation(fields: [system_id], references: [id])
+  system_id                 Int
   created_at                DateTime                  @default(now())
   updated_at                DateTime                  @updatedAt
   dnd5e_skills              Dnd5eSkill[]
