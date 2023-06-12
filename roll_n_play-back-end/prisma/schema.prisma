@@ -11,23 +11,194 @@ datasource db {
 }
 
 model User {
-  id              Int               @id @default(autoincrement())
-  email           String            @unique @db.VarChar(255)
-  username        String            @unique @db.VarChar(255)
-  iamge_url       String?
-  password        String            @db.VarChar(255)
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  id                        Int                       @id @default(autoincrement())
+  email                     String                    @unique @db.VarChar(255)
+  username                  String                    @unique @db.VarChar(255)
+  image_url                 String?
+  password                  String                    @db.VarChar(255)
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_characters          Dnd5eCharacter[]
 
   @@map("users")
 }
 
 model System {
-  id              Int               @id @default(autoincrement())
-  name            String            @unique @db.VarChar(255)
-  logo_url        String?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  logo_url                  String?
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_races               Dnd5eRace[]
+  dnd5e_classes             Dnd5eClass[]
+  dnd5e_characters          Dnd5eCharacter[]
 
   @@map("systems")
+}
+
+model Dnd5eAttribute {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_skills              Dnd5eSkill[]
+  dnd5e_characters          Dnd5eCharacter[]
+
+  @@map("dnd5e_attributes")
+}
+
+model Dnd5eSkill {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  attribute                 Dnd5eAttribute            @relation(fields: [attribute_id], references: [id])
+  attribute_id              Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  classes                   Dnd5eClass[]
+  dnd5e_characters          Dnd5eCharacter[]
+
+  @@map("dnd5e_skills")
+}
+
+model Dnd5eRace {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  description               String
+  system                    System                    @relation(fields: [system_id], references: [id])
+  system_id                 Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_racial_traits       Dnd5eRacialTrait[]
+  dnd5e_characters          Dnd5eCharacter[]
+
+  @@map("dnd5e_races")
+}
+
+model Dnd5eRacialTrait {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  description               String
+  race                      Dnd5eRace                 @relation(fields: [race_id], references: [id])
+  race_id                   Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+
+  @@map("dnd5e_racial_traits")
+}
+
+model Dnd5eClass {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  description               String
+  system                    System                    @relation(fields: [system_id], references: [id])
+  system_id                 Int
+  hit_dice                  Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_class_features      Dnd5eClassFeature[]
+  dnd5e_subclasses          Dnd5eSubclass[]
+  dnd5e_skills              Dnd5eSkill[]
+  dnd5e_spells              Dnd5eSpell[]
+  dnd5e_characters          Dnd5eCharacter[]
+
+  @@map("dnd5e_classes")
+}
+
+model Dnd5eClassFeature {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  description               String
+  level                     Int
+  class                     Dnd5eClass                @relation(fields: [class_id], references: [id])
+  class_id                  Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+
+  @@map("dnd5e_class_features")
+}
+
+model Dnd5eSubclass {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  description               String
+  class                     Dnd5eClass                @relation(fields: [class_id], references: [id])
+  class_id                  Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_subclass_features   Dnd5eSubclassFeature[]
+  dnd5e_characters          Dnd5eCharacter[]
+
+  @@map("dnd5e_subclasses")
+}
+
+model Dnd5eSubclassFeature {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  description               String
+  level                     Int
+  subclass                  Dnd5eSubclass             @relation(fields: [subclass_id], references: [id])
+  subclass_id               Int
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+
+  @@map("dnd5e_subclass_features")
+}
+
+model Dnd5eSpellSchool {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_spells              Dnd5eSpell[]
+
+  @@map("dnd5e_spell_schools")
+}
+
+model Dnd5eSpell {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @unique @db.VarChar(255)
+  ritual                    Boolean                   @default(false)
+  level                     Int
+  school                    Dnd5eSpellSchool          @relation(fields: [school_id], references: [id])
+  school_id                 Int
+  casting_time              String                    @db.VarChar(255)
+  range                     String                    @db.VarChar(255)
+  components                String                    @db.VarChar(255)
+  duration                  String                    @db.VarChar(255)
+  concentration             Boolean                   @default(false)
+  description               String
+  at_higher_levels          String?
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_classes             Dnd5eClass[]
+
+  @@map("dnd5e_spells")
+}
+
+model Dnd5eCharacter {
+  id                        Int                       @id @default(autoincrement())
+  name                      String                    @db.VarChar(255)
+  user                      User                      @relation(fields: [user_id], references: [id])
+  user_id                   Int
+  system                    System                    @relation(fields: [system_id], references: [id])
+  system_id                 Int
+  xp                        Int                       @default(0)
+  level                     Int                       @default(1)
+  race                      Dnd5eRace                 @relation(fields: [race_id], references: [id])
+  race_id                   Int
+  class                     Dnd5eClass                @relation(fields: [class_id], references: [id])
+  class_id                  Int
+  subclass                  Dnd5eSubclass             @relation(fields: [subclass_id], references: [id])
+  subclass_id               Int
+  max_hp                    Int
+  ac                        Int
+  speed                     Int
+  inspiration               Boolean                   @default(false)
+  alignment                 String
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime                  @updatedAt
+  dnd5e_attributes          Dnd5eAttribute[]
+  dnd5e_skills              Dnd5eSkill[]
+
+  @@map("dnd5e_characters")
 }
