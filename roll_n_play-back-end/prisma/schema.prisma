@@ -18,9 +18,21 @@ model User {
   password                  String                    @db.VarChar(255)
   created_at                DateTime                  @default(now())
   updated_at                DateTime                  @updatedAt
+  Session                   Session[]
   dnd5e_characters          Dnd5eCharacter[]
 
   @@map("users")
+}
+
+model Session {
+  id                        Int                       @id @default(autoincrement())
+  user                      User                      @relation(fields: [user_id], references: [id])
+  user_id                   Int
+  token                     String
+  createdAt                 DateTime                  @default(now())
+  updatedAt                 DateTime                  @updatedAt
+
+  @@map("sessions")
 }
 
 model System {
